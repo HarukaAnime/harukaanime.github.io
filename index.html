@@ -11,9 +11,12 @@
                 display: flex;
                 border-radius: 16px;
                 padding: 8px;
+                margin: 8px;
             }
             img {
                 border-radius: 8px;
+                margin-right: 16px;
+                height: 164px;
             }
         </style>
     </head>
@@ -32,8 +35,9 @@
             ];
             function get_listing() {
                 var next_page = anime.pop();
+                if(!next_page) { return; }
                 fetch("https://harukaanime.github.io/anime/" + next_page + ".html").then(resp => {
-                    resp.body.then(text => {
+                    resp.text().then(text => {
                         $("#listing").insertAdjacentHTML("beforeend", text);
                         get_listing();
                     });
